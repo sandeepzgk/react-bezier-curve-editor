@@ -32,7 +32,7 @@ class App extends React.Component<{}, IState> {
            <Slider vertical={true} style={verticalstyle} onChange={this.vChange} />
            <div>
                 <BezierCurveEditor
-                    size={1200}
+                    size={1200} leftHandlePosition={1}
                 />
                 <Slider style={horizontalstyle}  onChange={this.hChange} />
                 </div>
