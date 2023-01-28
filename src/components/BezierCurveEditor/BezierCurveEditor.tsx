@@ -81,7 +81,7 @@ export class BezierCurveEditor extends React.Component<IProps, IState> {
     }
 
     private get startCoordinate() {
-        const { fixedHandlePosition } = this.props as PropsWithDefaults;
+        const { fixedHandlePosition } = this.props as PropsWithDefaults; 
         return [0, this.height * (1 - fixedHandlePosition[0])];
     }
 

@@ -20,10 +20,12 @@ class App extends React.Component<{}, IState> {
       lPosition = 0;
       hPosition = 0;
       vChange = (value) => {
+        if (value < 3) value = 0;
       this.setState({lPosition: value/100});
         this.lPosition = (value/100);
       }
       hChange = (value) => {
+        if (value < 3) value = 0;
         this.setState({hPosition: value/100});
           this.hPosition = (value/100);
         }
@@ -38,7 +40,7 @@ class App extends React.Component<{}, IState> {
            <div>
                 <BezierCurveEditor
                     size={1200} fixedHandlePosition={[this.lPosition,this.hPosition]}   />
-                 <Slider vertical={false} style={verticalstyle} onChange={this.hChange} />
+                 <Slider vertical={false} reverse={true} style={verticalstyle} onChange={this.hChange} />
                 </div>
                 </div>
             </main>
