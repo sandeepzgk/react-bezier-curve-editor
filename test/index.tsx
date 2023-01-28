@@ -20,12 +20,12 @@ class App extends React.Component<{}, IState> {
       lPosition = 0;
       hPosition = 0;
       vChange = (value) => {
-        if (value < 3) value = 0;
+        if (value < 3) value = 0; // THIS IS A HACK, this hack is to ensure that when the min value is low, it snaps to zero, for some reason the slider likes to stay between 1 and 3 even when you slide to the max
       this.setState({lPosition: value/100});
         this.lPosition = (value/100);
       }
       hChange = (value) => {
-        if (value < 3) value = 0;
+        if (value < 3) value = 0; // THIS IS A HACK, this hack is to ensure that when the min value is low, it snaps to zero, for some reason the slider likes to stay between 1 and 3 even when you slide to the max
         this.setState({hPosition: value/100});
           this.hPosition = (value/100);
         }
