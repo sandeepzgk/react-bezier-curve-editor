@@ -82,13 +82,12 @@ export class BezierCurveEditor extends React.Component<IProps, IState> {
 
     private get startCoordinate() {
         const { fixedHandlePosition } = this.props as PropsWithDefaults;
-        //console.log(typeof(leftHandlePosition))
-        //console.log("leftHandlePosition:", leftHandlePosition);
-        return [0, this.height-fixedHandlePosition[0]*this.height];
+        return [0, this.height * (1 - fixedHandlePosition[0])];
     }
 
     private get endCoordinate() {
-        return [this.width,0];
+        const { fixedHandlePosition } = this.props as PropsWithDefaults;
+        return [this.width * (1 - fixedHandlePosition[1]),0];
     }
 
     private get startBezierHandle() {
@@ -228,12 +227,6 @@ export class BezierCurveEditor extends React.Component<IProps, IState> {
       }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log("fixedHandlePosition props: ", this.props.fixedHandlePosition)
-        console.log("fixedHandlePosition state: ", this.state.fixedHandlePosition)
-      }
-
-  
 
     public componentWillUnmount() {
         window.removeEventListener('mousemove', this.handleWindowMouseMove);
