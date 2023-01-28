@@ -12,7 +12,7 @@ interface IProps {
     strokeWidth?: number;
     rowColor?: string;
     fixedHandleColor?: string;
-    leftHandlePosition?: number;
+    fixedHandlePosition?: Array<number>;
     curveLineColor?: string;
     handleLineColor?: string;
     startHandleColor?: string;
@@ -33,7 +33,7 @@ interface IState {
     movingStartHandleStart: { x: number; y: number; };
     movingEndHandle: boolean;
     movingEndHandleStart: { x: number; y: number; };
-    leftHandlePosition: number;
+    fixedHandlePosition: Array<number>;
 }
 
 type PropsWithDefaults = IProps & typeof BezierCurveEditor.defaultProps;
@@ -45,7 +45,7 @@ const defaultStateValue: IState = {
   movingEndHandle: false,
   movingStartHandleStart: { x: 0, y: 0 },
   movingEndHandleStart: { x: 0, y: 0 },
-    leftHandlePosition: 0.0,
+  fixedHandlePosition: [0.0,0.0],
 }
 
 export class BezierCurveEditor extends React.Component<IProps, IState> {
@@ -81,8 +81,10 @@ export class BezierCurveEditor extends React.Component<IProps, IState> {
     }
 
     private get startCoordinate() {
-        const { leftHandlePosition } = this.props as PropsWithDefaults;
-        return [0, this.height-leftHandlePosition*this.height];
+        const { fixedHandlePosition } = this.props as PropsWithDefaults;
+        //console.log(typeof(leftHandlePosition))
+        //console.log("leftHandlePosition:", leftHandlePosition);
+        return [0, this.height-fixedHandlePosition[0]*this.height];
     }
 
     private get endCoordinate() {
@@ -221,10 +223,17 @@ export class BezierCurveEditor extends React.Component<IProps, IState> {
       if (typeof props.value !== 'undefined') {
         this.state = {
           ...defaultStateValue,
-          value: props.value,
+          value: props.value
         }
       }
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log("fixedHandlePosition props: ", this.props.fixedHandlePosition)
+        console.log("fixedHandlePosition state: ", this.state.fixedHandlePosition)
+      }
+
+  
 
     public componentWillUnmount() {
         window.removeEventListener('mousemove', this.handleWindowMouseMove);

@@ -16,12 +16,13 @@ class App extends React.Component<{}, IState> {
     public state = {
 
     }
-    hChange = (value) => {
-        console.log(value);
-      }
+  
 
+      lPosition = 0;
       vChange = (value) => {
-        console.log(value);
+      this.setState({lPosition: value/100});
+        this.lPosition = (value/100);
+       // console.log(this.lPosition);
       }
 
     public render() {
@@ -32,9 +33,8 @@ class App extends React.Component<{}, IState> {
            <Slider vertical={true} style={verticalstyle} onChange={this.vChange} />
            <div>
                 <BezierCurveEditor
-                    size={1200} leftHandlePosition={0}
-                />
-                <Slider style={horizontalstyle}  onChange={this.hChange} />
+                    size={1200} fixedHandlePosition={[this.lPosition,0]}   />
+                
                 </div>
                 </div>
             </main>
